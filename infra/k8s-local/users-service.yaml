@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+        - name: users
+          image: guyberko/users
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://users-mongo:27017/users'
+            - name: PORT
+              value: '4001'
+            - name: JWT_SECRET
+              value: DVl9c1iySWRbHQ7TcGHNaKX29TdmvCoN
+            - name: STRIPE_SECRET
+              value: sk_test_51IIfQXGp7Ot0L3hwwMcOjjbiw1vtd5WojtrWQFPLk8RTrrAxJj3TKIbs2ter3P0BRlSSGXoi0hqN81aDFsLSkBX200uTjnkpM8
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /ready
+              port: 4001
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /live
+              port: 4001
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-srv
+spec:
+  selector:
+    app: users
+  ports:
+    - name: users
+      protocol: TCP
+      port: 4001
+      targetPort: 4001

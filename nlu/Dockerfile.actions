@@ -1,0 +1,12 @@
+FROM rasa/rasa-sdk:3.0.4
+WORKDIR /app
+
+USER root
+
+RUN pip install openai
+
+USER 1001
+
+COPY . .
+
+CMD [ "start", "--actions", "actions.actions", "--port", "4006"]

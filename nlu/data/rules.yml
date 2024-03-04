@@ -1,0 +1,129 @@
+version: "3.0"
+
+rules:
+
+- rule: send greet message to user
+  steps:
+  - intent: new_user
+  - action: action_greet_new_user
+
+- rule: Run free speech model on nlu_fallback
+  steps:
+  - intent: nlu_fallback
+  - action: action_run_model
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: what is your name
+  steps:
+  - intent: what_is_your_name
+  - action: utter_myname
+
+- rule: what is your job
+  steps:
+  - intent: what_is_your_job
+  - action: utter_myjob
+
+- rule: what is your age
+  steps:
+  - intent: what_is_your_age
+  - action: utter_myage
+
+- rule: where are you from
+  steps:
+  - intent: where_are_you_from
+  - action: utter_mylocation
+
+- rule: greet
+  steps:
+  - intent: greet
+  - action: action_run_model  # FIXME
+
+- rule: bye bye
+  steps:
+  - intent: goodbye
+  - action: action_run_model  # FIXME
+
+- rule: affirm_rule
+  steps:
+  - intent: affirm
+  - action: action_run_model  # FIXME
+
+- rule: deny_rule
+  steps:
+  - intent: deny
+  - action: action_run_model  # FIXME
+
+- rule: how can lingos help you
+  steps:
+  - intent: how_can_you_help_me
+  - action: utter_how_can_you_help_me
+
+- rule: what is my email
+  steps:
+  - intent: what_is_your_email
+  - action: utter_my_email
+
+- rule: what is my website
+  steps:
+  - intent: what_is_your_website
+  - action: utter_my_website
+
+- rule: no phone number
+  steps:
+  - intent: what_is_your_phone_number
+  - action: utter_no_number
+
+- rule: do role-playing
+  steps:
+  - intent: do_role_playing
+  - action: utter_do_role_playing
+
+- rule: cancel subscription
+  steps:
+  - intent: cancel_subscription
+  - action: utter_cancel_subscription
+
+- rule: set spanish
+  steps:
+  - intent: spanish
+  - action: action_change_language
+
+- rule: do not set spanish
+  condition:
+  - slot_was_set:
+    - lang: es
+  steps:
+  - intent: spanish
+  - action: action_run_model
+
+- rule: set english
+  steps:
+  - intent: english
+  - action: action_change_language
+
+- rule: do not set english
+  condition:
+  - slot_was_set:
+    - lang: en
+  steps:
+  - intent: english
+  - action: action_run_model
+
+- rule: set data
+  steps:
+  - intent: set_data
+  - action: action_set_data
+
+- rule: get suggested response for user
+  steps:
+  - intent: get_suggested_response
+  - action: action_get_suggested_response
+
+- rule: send daily practice message
+  steps:
+  - intent: daily_practice
+  - action: action_daily_practice

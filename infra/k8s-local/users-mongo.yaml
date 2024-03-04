@@ -1,0 +1,90 @@
+apiVersion: "apps/v1"
+kind: "StatefulSet"
+metadata:
+  name: "users-mongo"
+spec:
+  serviceName: "users-mongo"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "users-mongo"
+  template:
+    metadata:
+      labels:
+        app: "users-mongo"
+    spec:
+      containers:
+        - name: "users-mongo"
+          image: "mongo"
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 27017
+              name: "mongodb"
+          volumeMounts:
+            - name: "users-mongodb-persistent-storage"
+              mountPath: "/data/db"
+      volumes:
+        - name: "users-mongodb-persistent-storage"
+          persistentVolumeClaim:
+            claimName: "users-mongodb-pvc"
+
+---
+apiVersion: "v1"
+kind: "PersistentVolumeClaim"
+metadata:
+  name: "users-mongodb-pvc"
+  labels:
+    app: "users-mongo"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: hostpath
+
+---
+apiVersion: "v1"
+kind: "PersistentVolume"
+metadata:
+  name: "users-mongo-pv"
+  labels:
+    type: local
+    app: "users-mongo"
+spec:
+  storageClassName: hostpath
+  volumeMode: Filesystem
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    name: "users-mongodb-pvc"
+  hostPath:
+    path: /data/db
+    type: DirectoryOrCreate
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - docker-desktop
+
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "users-mongo"
+  labels:
+    app: "users-mongo"
+spec:
+  ports:
+    - name: "mongodb"
+      port: 27017
+      targetPort: 27017
+  clusterIP: "None"
+  selector:
+    app: "users-mongo"

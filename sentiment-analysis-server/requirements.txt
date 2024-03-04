@@ -1,0 +1,9 @@
+black==19.10b0
+isort
+flake8
+gdown
+fastapi
+uvicorn
+pydantic  
+transformers==2.8.0
+httpie

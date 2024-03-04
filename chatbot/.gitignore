@@ -1,0 +1,11 @@
+.env
+.DS_Store
+.idea/
+model_checkpoints/
+tmp_audio.wav
+output.mp3
+conversations/
+pretrained_models/
+__pycache__/
+.vscode/
+json/

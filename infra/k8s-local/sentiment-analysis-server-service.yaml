@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentiment-analysis-server-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sentiment-analysis-server
+  template:
+    metadata:
+      labels:
+        app: sentiment-analysis-server
+    spec:
+      containers:
+        - name: sentiment-analysis-server
+          image: guyberko/sentiment-analysis-server
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: CUDA_VISIBLE_DEVICES
+              value: ''
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sentiment-analysis-server-srv
+spec:
+  selector:
+    app: sentiment-analysis-server
+  ports:
+    - name: sentiment-analysis-server
+      protocol: TCP
+      port: 4003
+      targetPort: 4003

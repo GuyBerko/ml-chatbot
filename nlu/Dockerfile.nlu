@@ -1,0 +1,6 @@
+FROM rasa/rasa:3.0.4
+WORKDIR /app
+
+COPY . .
+
+CMD [ "run", "--enable-api", "--port", "4005"]

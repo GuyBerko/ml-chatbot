@@ -1,0 +1,67 @@
+.App {
+  height: 100vh;
+
+  .loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #ffffff;
+    background: rgb(0 0 0 / 30%);
+  }
+
+  .main {
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px - 84px);
+  }
+
+  .footer {
+    display: flex;
+    flex: 1;
+    padding: 2rem 0;
+    border-top: 1px solid #eaeaea;
+    justify-content: center;
+    align-items: center;
+    height: 84px;
+    background: #cecccc;
+  }
+
+  .logo {
+    max-width: 50vw;
+  }
+
+  .header {
+    display: flex;
+    justify-content: center;
+    background: #42b3d4;
+    height: 100px;
+  }
+
+  .back-to-bot-btn {
+    position: absolute;
+    left: 3%;
+    top: 40px;
+    border: none;
+    background: #add8e6;
+    border-radius: 4px;
+    height: 30px;
+    box-shadow: 1px 1px 5px -1px black;
+    z-index: 999999;
+    cursor: pointer;
+
+    &:hover{
+      background-color: #9bd8ed;
+    }
+  }
+}

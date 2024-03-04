@@ -1,0 +1,189 @@
+version: "3.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - see you
+    - good bye
+    - see you later
+    - good night
+    - bye
+    - goodbye
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    - are you a person?
+
+- intent: what_is_your_name
+  examples: |
+    - what is your name?
+    - what's your name?
+    - your name?
+    - what do I call you?
+    - may I ask for your name?
+    - do you have a name?
+    - How do you call yourself?
+
+- intent: what_is_your_job
+  examples: |
+    - what's your job?
+    - what is your profession?
+    - what do you do for work?
+    - what do you do for a living?
+    - what kind of work do you do?
+    - what do you do?
+
+- intent: what_is_your_age
+  examples: |
+    - what is your age?
+    - what's your age?
+    - how old are you?
+    - would you mind telling me your age?
+    - your age?
+    - may I ask for your age?
+    - may I ask how old you are?
+
+- intent: where_are_you_from
+  examples: |
+    - where are you from?
+    - where do you live?
+    - from what country are you?
+    - where are you located?
+    - in what country are you?
+
+- intent: how_can_you_help_me
+  examples: |
+    - how can you help me?
+    - how can you help improve my english?
+    - what can you do?
+    - how can I practice my english?
+    - how do I practice my english?
+    - how do I imorove my english?
+    - how can I improve my english?
+    - help me improve my english
+    - help me practice my english
+
+- intent: what_is_your_email
+  examples: |
+    - what is your email?
+    - do you have an email?
+    - how can I contact you?
+    - what's your email?
+    - give me your email address
+
+- intent: what_is_your_website
+  examples: |
+    - what is your website?
+    - do you have a website?
+    - what's your website address?
+    - do you have a site?
+
+- intent: what_is_your_phone_number
+  examples: |
+    - what is your number?
+    - what is your phone number?
+    - do you have a phone number?
+    - what's your number?
+    
+- intent: do_role_playing
+  examples: |
+    - let's do role-playing
+    - can we do role-playing
+    - do you want to do role-playing
+    - let's role-play
+    - let's do role-play
+    - would you like to do role-playing?
+    - would you like to role-play?
+
+- intent: cancel_subscription
+  examples: |
+    - how do I cancel my subscription?
+    - how can I cancel my subscription?
+    - cancel my subscription please
+    - cancel subscription
+    - cancel my subscription
+    - how to cancel my subscription?
+    - how to cancel?
+
+- intent: spanish
+  examples: |
+    - can we speak in spanish?
+    - let's speak in spanish.
+    - let's talk in spanish.
+    - do you speak spanish?
+    - can we speak spanish?
+    - speak spanish
+    - ¿podemos hablar en español?
+    - podemos hablar en espanol?
+    - hablemos en español.
+    - ¿hablas español?
+    - hablas espanol?
+    - ¿podemos hablar español?
+    - podemos hablar espanol?
+    - habla español
+    - habla espanol
+    - hable español
+    - hable espanol
+
+- intent: english
+  examples: |
+    - can we speak in english?
+    - let's speak in english.
+    - let's talk in english.
+    - do you speak english?
+    - can we speak english?
+    - speak english
+    - ¿podemos hablar en inglés?
+    - podemos hablar en ingles?
+    - hablemos en inglés.
+    - hablemos en ingles.
+    - ¿hablas inglés?
+    - hablas ingles?
+    - ¿podemos hablar inglés?
+    - podemos hablar ingles?
+    - habla inglés
+    - habla ingles
+    - hable inglés
+    - hable ingles

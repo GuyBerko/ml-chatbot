@@ -1,0 +1,15 @@
+FROM python:3.9 
+
+WORKDIR /app
+COPY requirements.txt requirements.txt
+
+ENV LD_LIBRARY_PATH="/usr/local/nvidia/lib64"
+
+RUN --mount=type=cache,target=/root/.cache pip --default-timeout=1000 install parlai
+RUN --mount=type=cache,target=/root/.cache pip --default-timeout=1000 install -r requirements.txt
+
+COPY . .
+
+RUN python3 -u src/initModel.py
+
+CMD [ "python3", "-u", "src/server.py"]

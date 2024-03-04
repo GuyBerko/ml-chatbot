@@ -1,0 +1,90 @@
+apiVersion: "apps/v1"
+kind: "StatefulSet"
+metadata:
+  name: "chatbot-mongo"
+spec:
+  serviceName: "chatbot-mongo"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "chatbot-mongo"
+  template:
+    metadata:
+      labels:
+        app: "chatbot-mongo"
+    spec:
+      containers:
+        - name: "chatbot-mongo"
+          image: "mongo"
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 27017
+              name: "mongodb"
+          volumeMounts:
+            - name: "chatbot-mongodb-persistent-storage"
+              mountPath: "/data/db"
+      volumes:
+        - name: "chatbot-mongodb-persistent-storage"
+          persistentVolumeClaim:
+            claimName: "chatbot-mongodb-pvc"
+
+---
+apiVersion: "v1"
+kind: "PersistentVolumeClaim"
+metadata:
+  name: "chatbot-mongodb-pvc"
+  labels:
+    app: "chatbot-mongo"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: hostpath
+
+---
+apiVersion: "v1"
+kind: "PersistentVolume"
+metadata:
+  name: "chatbot-mongo-pv"
+  labels:
+    type: local
+    app: "chatbot-mongo"
+spec:
+  storageClassName: hostpath
+  volumeMode: Filesystem
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    name: "chatbot-mongodb-pvc"
+  hostPath:
+    path: /data/db
+    type: DirectoryOrCreate
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - docker-desktop
+
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "chatbot-mongo"
+  labels:
+    app: "chatbot-mongo"
+spec:
+  ports:
+    - name: "mongodb"
+      port: 27017
+      targetPort: 27017
+  clusterIP: "None"
+  selector:
+    app: "chatbot-mongo"

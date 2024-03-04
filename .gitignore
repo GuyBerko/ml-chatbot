@@ -1,0 +1,18 @@
+temp/
+.vscode
+certificats/
+node_modules/
+.DS_Store
+.env
+secrets.yaml
+.idea/
+.rasa
+
+infra/
+
+
+# bot cache files
+nlu/.rasa
+nlu/actions/__pycache__/
+nlu/actions/text/__pycache__/
+

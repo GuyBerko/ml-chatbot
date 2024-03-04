@@ -1,0 +1,15 @@
+transformers==4.12.5
+fairseq==0.10.0
+python-dotenv
+bs4
+chardet
+fire
+html2text
+html5lib
+requests
+rich
+lxml
+google
+Flask
+pymongo
+paralleldots

@@ -1,0 +1,113 @@
+version: '3.0'
+session_config:
+  session_expiration_time: 15
+  carry_over_slots_to_new_session: true
+intents:
+- new_user
+- nlu_fallback
+- bot_challenge
+- what_is_your_name
+- what_is_your_job
+- what_is_your_age
+- where_are_you_from
+- greet
+- goodbye
+- affirm
+- deny
+- how_can_you_help_me
+- what_is_your_email
+- what_is_your_website
+- what_is_your_phone_number
+- do_role_playing
+- cancel_subscription
+- english
+- spanish
+- set_data
+- get_suggested_response
+- daily_practice
+
+responses:
+  utter_iamabot:
+    - text: I'm a bot.
+    - text: I'm an AI bot.
+  utter_myname:
+    - text: My name is Lingos.
+    - text: I'm Lingos.
+  utter_myjob:
+  - text: I'm an AI English Tutor.
+  - text: I work as an English Tutor.
+  utter_myage:
+  - text: I'm 34.
+  - text: I'm 34 years old.
+  - text: 34 years old.
+  utter_mylocation:
+  - text: I'm from the US.
+  - text: I live in the US.
+  - text: I live in the United States.
+  - text: I'm American.
+  utter_how_can_you_help_me:
+  - text: There's nothing better than chatting with me about whatever subject you want, asking about word definitions, grammar rules, and even role-play to enrich your language.
+  - text: If you want to enhance your language skills, I can discuss word definitions, grammar rules, and even role-play with you.
+  - text: My goal is to help you improve your language skills by discussing word definitions, grammar rules, and even role-playing.
+  utter_my_email:
+  - text: My email is info@lingos.ai
+  - text: My email address is info@lingos.ai
+  - text: info@lingos.ai
+  - text: You can contact me at info@lingos.ai
+  utter_my_website:
+    - text: My website is www.lingos.ai
+    - text: www.lingos.ai
+  utter_no_number:
+    - text: I don't have a phone number.
+  utter_do_role_playing:
+    - text: Certainly! What would you like to role-play? If you prefer, I can choose.
+    - text: Of course! What would you like to role-play? If you want, I can choose.
+    - text: That's a great idea. What kind of role-playing are you interested in? I can choose if you prefer.
+    - text: Excellent idea! What kind of role-playing are you interested in?
+    - text: Great idea! Who do you want to be and who should I be?
+  utter_cancel_subscription:
+    - text: Write '/cancel' to cancel your subscription.
+
+actions:
+- action_run_model
+- action_greet_new_user
+- action_change_topic_and_ignore_history
+- action_set_data
+- action_get_suggested_response
+- action_daily_practice
+- action_change_language
+
+entities:
+- name
+- lang
+
+slots:
+  lang:
+    type: categorical
+    values:
+      - en
+      - es
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom
+        entity: name
+        intent: set_data
+
+  suggested_response:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  daily_practice_cnt:
+    type: float
+    initial_value: 0
+    influence_conversation: false
+    mappings:
+      - type: custom

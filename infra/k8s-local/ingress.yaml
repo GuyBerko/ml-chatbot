@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - host: localhost
+    http:
+      paths:
+        - path: /searchserver(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: search-server-srv
+              port:
+                number: 4002
+        - path: /users(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: users-srv
+              port:
+                number: 4001
+        - path: /chatbot(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: chatbot-srv
+              port:
+                number: 4000
+        

@@ -1,0 +1,38 @@
+.Products {
+  padding-bottom: 40px;
+
+  h1 {
+    text-align: center;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 63px;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  h2   {
+    text-align: center;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #ffffff;
+    margin: 1;
+  }
+
+  .cards-wrapper {
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+  }
+
+  @media screen and (max-width: 540px) {
+    .cards-wrapper{
+      flex-direction: column;
+    }
+  }
+}
